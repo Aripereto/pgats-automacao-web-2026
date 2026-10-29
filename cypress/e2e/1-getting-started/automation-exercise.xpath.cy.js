@@ -71,12 +71,13 @@ describe('Automation Exercise', () => {
         cy.xpath('//button[@data-qa="login-button"]').click()
 
         //assert (valida se realmente fez login identificando um elemento na pagina)
-        cy.get('form[action*="login"] > p').should('contain', 'Your email or password is incorrect!')
+        cy.xpath('//form[contains(@action, "login")]/p')
+            .should('contain', 'Your email or password is incorrect!')
 
     });
 
    it('Fazer login com e-mail e senha corretos', () => {
-        cy.visit('https://automationexercise.com');
+         cy.visit('https://automationexercise.com');
         cy.get('a[href*=login]').click();
 
         cy.xpath('//input[@data-qa="login-email"]').type('peretto@example.com')
@@ -84,21 +85,21 @@ describe('Automation Exercise', () => {
         cy.xpath('//button[@data-qa="login-button"]').click()
 
         //assert (valida se realmente fez login identificando um elemento na pagina)
-        cy.get('a > b').should('contain', 'PERETTO')
+        cy.xpath('//a/b').should('contain', 'PERETTO')
 
     });
 
    it('Fazer logout do usuário', () => {
-        cy.visit('https://automationexercise.com');
+       cy.visit('https://automationexercise.com');
         cy.get('a[href*=login]').click();
 
         cy.xpath('//input[@data-qa="login-email"]').type('peretto@example.com')
         cy.xpath('//input[@data-qa="login-password"]').type('12345')
         cy.xpath('//button[@data-qa="login-button"]').click()
-        cy.xpath('.shop-menu > .nav > :nth-child(4) > a').click()
+        cy.xpath('//div[contains(@class, "shop-menu")]//a[normalize-space()="Logout"]').click()
 
         //assert (valida se realmente fez login identificando um elemento na pagina. Aqui pegou o login to your account)
-        cy.get('.login-form > h2').should('be.visible')
+        cy.xpath('//div[contains(@class, "login-form")]/h2').should('be.visible')
 
     });
 
