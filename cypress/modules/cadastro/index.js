@@ -35,6 +35,7 @@ function preenchercadastro() {
     cy.get('[data-qa="zipcode"]').type('05787-000')
     cy.get('[data-qa="mobile_number"]').type('+55 11 99999-9989')
 
+
 }
 
 function verificarSeCadastroFoiRealizadoComSucesso() {
@@ -42,6 +43,7 @@ function verificarSeCadastroFoiRealizadoComSucesso() {
     cy.get('[data-qa="account-created"]')
         .should('be.visible')
         .and('contain', 'Account Created!')
+    cy.get('[data-qa="continue-button"]').click()
 
 }
 
